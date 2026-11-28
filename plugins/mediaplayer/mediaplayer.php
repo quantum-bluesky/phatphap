@@ -44,8 +44,8 @@ class mediaplayer extends Plugin
             $this->handleGalleryDownload((string)$_GET['url']);
         }
         if (!$this->adminroute || $this->editorroute) {
-            $this->addCSS('/mediaplayer/css/mediaplayer.css?20261128b');
-            $this->addJS('/mediaplayer/js/mediaplayer.js?20261128b');
+            $this->addCSS('/mediaplayer/css/mediaplayer.css?20261128c');
+            $this->addJS('/mediaplayer/js/mediaplayer.js?20261128c');
         }
     }
 
@@ -336,6 +336,9 @@ class mediaplayer extends Plugin
             $shortcodeArray['data']['videolist'] = [
                 'id' => 'text',
             ];
+            $shortcodeArray['data']['videotimeline'] = [
+                'id' => 'text',
+            ];
             $shortcode->setData($shortcodeArray);
             return;
         }
@@ -354,7 +357,7 @@ class mediaplayer extends Plugin
             return;
         }
 
-        # 1g. [:videohub id="videohub" :] and [:videolist id="videos" :]
+        # 1g. [:videohub id="videohub" :], [:videolist id="videos" :], [:videotimeline id="chronicle" :]
         if ($name === 'videohub') {
             $shortcode->stopPropagation();
             $hubId = trim($params['id'] ?? 'videohub');
@@ -367,6 +370,14 @@ class mediaplayer extends Plugin
             $this->playerRendered = true;
             $listId = trim($params['id'] ?? 'videos');
             $shortcode->setData($this->renderVideoList($listId ?: 'videos'));
+            return;
+        }
+
+        if ($name === 'videotimeline') {
+            $shortcode->stopPropagation();
+            $this->playerRendered = true;
+            $listId = trim($params['id'] ?? 'chronicle');
+            $shortcode->setData($this->renderVideoTimeline($listId ?: 'chronicle'));
             return;
         }
 
@@ -1982,6 +1993,170 @@ class mediaplayer extends Plugin
                    . '  </div>'
                    . '  <div class="tm-story-video-drawer" id="' . $vidBoxId . '" style="display:none;"></div>'
                    . '</article>';
+        }
+
+        $html .= '  </div>'
+               . '</div>';
+
+        return $html;
+    }
+
+    protected function renderVideoTimeline(string $listId = 'chronicle'): string
+    {
+        $data = $this->currentMeta['mediaplayer'][$listId] ?? ($this->currentMeta[$listId] ?? null);
+        if (!$data || empty($data['items']) || !is_array($data['items'])) {
+            return '<div class="tm-media-alert">Chưa có dữ liệu dòng thời gian lịch sử cho mục [' . htmlspecialchars($listId, ENT_QUOTES, 'UTF-8') . '].</div>';
+        }
+
+        $items = array_values($data['items']);
+        $total = count($items);
+        $uid   = 'tmchron_' . substr(md5($listId . $total . ($items[0]['title'] ?? '')), 0, 8);
+
+        $eraCounts = [];
+        foreach ($items as $it) {
+            $era = trim((string)($it['era'] ?? ''));
+            if ($era !== '') {
+                $eraCounts[$era] = ($eraCounts[$era] ?? 0) + 1;
+            }
+        }
+
+        $pillsHtml = '';
+        if (count($eraCounts) > 1) {
+            $pillsHtml .= '<div class="tm-chronicle-eras" role="tablist" aria-label="Lọc theo giai đoạn lịch sử">'
+                        . '<button type="button" class="tm-chronicle-era-pill active" data-era="all" onclick="window.tmSelectChronicleEra(\'' . $uid . '\', \'all\', this)">Toàn bộ hành trình (' . $total . ' tập)</button>';
+            foreach ($eraCounts as $eraName => $eraCount) {
+                $safeEra = htmlspecialchars($eraName, ENT_QUOTES, 'UTF-8');
+                $jsEra   = htmlspecialchars(addslashes($eraName), ENT_QUOTES, 'UTF-8');
+                $pillsHtml .= '<button type="button" class="tm-chronicle-era-pill" data-era="' . $safeEra . '" onclick="window.tmSelectChronicleEra(\'' . $uid . '\', \'' . $jsEra . '\', this)">'
+                            . $safeEra . ' (' . $eraCount . ')'
+                            . '</button>';
+            }
+            $pillsHtml .= '</div>';
+        }
+
+        $html = '<div class="tm-chronicle-app" id="' . $uid . '" data-active-era="all">'
+              . '  <div class="tm-chronicle-controls">'
+              . '    <div class="tm-tracklist-toolbar tm-vidlist-toolbar">'
+              . '      <input type="search" class="tm-tracklist-search tm-chronicle-search" placeholder="🔍 Tìm theo tên tập, nhân vật, địa danh hoặc sự kiện lịch sử (vd: Lâm-tỳ-ni, Tất Đạt Đa, bốn cửa thành, Ca Diếp)..." oninput="window.tmFilterChronicle(\'' . $uid . '\')" />'
+              . '      <span class="tm-tracklist-count">Hiển thị: <strong class="tm-chronicle-visible">' . $total . '</strong> / ' . $total . ' tập</span>'
+              . '    </div>'
+              .      $pillsHtml
+              . '  </div>'
+              . '  <div class="tm-chronicle-track">';
+
+        $volTitleClean = htmlspecialchars((string)($this->currentMeta['meta']['title'] ?? 'Cuộc Đời Đức Phật Thích Ca'), ENT_QUOTES, 'UTF-8');
+
+        foreach ($items as $i => $ep) {
+            $epNum     = $ep['episode'] ?? ($ep['id'] ?? ($i + 1));
+            $epLabel   = htmlspecialchars((string)($ep['chapter_label'] ?? ('Tập ' . $epNum)), ENT_QUOTES, 'UTF-8');
+            $rawTitle  = (string)($ep['title'] ?? ('Tập ' . $epNum));
+            $title     = htmlspecialchars($rawTitle, ENT_QUOTES, 'UTF-8');
+            $rawEra    = trim((string)($ep['era'] ?? ''));
+            $era       = htmlspecialchars($rawEra, ENT_QUOTES, 'UTF-8');
+            $rawLoc    = trim((string)($ep['location'] ?? ''));
+            $location  = htmlspecialchars($rawLoc, ENT_QUOTES, 'UTF-8');
+            $dur       = htmlspecialchars(trim((string)($ep['duration'] ?? '')), ENT_QUOTES, 'UTF-8');
+            $rawNarr   = trim((string)($ep['narrative'] ?? ($ep['summary'] ?? '')));
+            $narrative = nl2br(htmlspecialchars($rawNarr, ENT_QUOTES, 'UTF-8'));
+            $gapBefore = trim((string)($ep['gap_before'] ?? ''));
+
+            $highlights = [];
+            if (!empty($ep['highlights']) && is_array($ep['highlights'])) {
+                foreach ($ep['highlights'] as $hl) {
+                    $hlStr = trim((string)$hl);
+                    if ($hlStr !== '') {
+                        $highlights[] = $hlStr;
+                    }
+                }
+            }
+
+            $vidUrl   = trim((string)($ep['video_url'] ?? ''));
+            $normVid  = $this->normalizeEmbedUrl($vidUrl);
+            $embedVid = htmlspecialchars($normVid['url'] ?? '', ENT_QUOTES, 'UTF-8');
+            $safeVid  = htmlspecialchars($vidUrl, ENT_QUOTES, 'UTF-8');
+            $vidBoxId = $uid . '_cdraw_' . $i;
+
+            $thumbUrl = trim((string)($ep['thumb'] ?? ''));
+            $fallbackThumb = '';
+            if ($thumbUrl === '') {
+                $coverId = trim((string)($ep['cover_id'] ?? ''));
+                if ($coverId === '' && !empty($normVid['videoId']) && !str_starts_with($normVid['videoId'], 'pl_')) {
+                    $coverId = $normVid['videoId'];
+                }
+                if ($coverId !== '') {
+                    $thumbUrl = 'https://i.ytimg.com/vi/' . rawurlencode($coverId) . '/maxresdefault.jpg';
+                    $fallbackThumb = 'https://i.ytimg.com/vi/' . rawurlencode($coverId) . '/hqdefault.jpg';
+                }
+            }
+            $safeThumb = htmlspecialchars($thumbUrl, ENT_QUOTES, 'UTF-8');
+            $onErrAttr = $fallbackThumb !== ''
+                ? ' onerror="if(!this.dataset.fb){this.dataset.fb=1;this.src=\'' . htmlspecialchars($fallbackThumb, ENT_QUOTES, 'UTF-8') . '\';}"'
+                : '';
+
+            $combinedPlain = $epLabel . ' ' . $rawTitle . ' ' . $rawEra . ' ' . $rawLoc . ' ' . $rawNarr . ' ' . implode(' ', $highlights) . ' duc phat thich ca tat dat da';
+            $searchIndex   = htmlspecialchars(mb_strtolower($combinedPlain, 'UTF-8') . ' ' . $this->stripAccentsForSearch($combinedPlain), ENT_QUOTES, 'UTF-8');
+
+            if ($gapBefore !== '') {
+                $html .= '    <div class="tm-chronicle-gap" data-era-gap="1">'
+                       . '      <div class="tm-chronicle-gap-dot" aria-hidden="true">⋯</div>'
+                       . '      <div class="tm-chronicle-gap-body">' . htmlspecialchars($gapBefore, ENT_QUOTES, 'UTF-8') . '</div>'
+                       . '    </div>';
+            }
+
+            $html .= '    <article class="tm-chronicle-node tm-chronicle-card" id="tap-' . htmlspecialchars((string)$epNum, ENT_QUOTES, 'UTF-8') . '" data-era="' . $era . '" data-search="' . $searchIndex . '">'
+                   . '      <div class="tm-chronicle-marker" aria-hidden="true">'
+                   . '        <span class="tm-chronicle-badge-num">' . htmlspecialchars((string)$epNum, ENT_QUOTES, 'UTF-8') . '</span>'
+                   . '      </div>'
+                   . '      <div class="tm-chronicle-panel">'
+                   . '        <div class="tm-chronicle-head">'
+                   . '          <span class="tm-chronicle-chap">' . $epLabel . '</span>'
+                   . ($era !== '' ? '<span class="tm-chronicle-era-tag">' . $era . '</span>' : '')
+                   . ($location !== '' ? '<span class="tm-chronicle-loc">📍 ' . $location . '</span>' : '')
+                   . ($dur !== '' ? '<span class="tm-chronicle-dur">⏱ ' . $dur . '</span>' : '')
+                   . '        </div>'
+                   . '        <h3 class="tm-chronicle-title tm-story-title">' . $title . '</h3>'
+                   . '        <div class="tm-chronicle-body">';
+
+            if ($safeThumb !== '' && $embedVid !== '') {
+                $html .= '          <div class="tm-chronicle-media">'
+                       . '            <button type="button" class="tm-vidstory-thumb-btn" onclick="window.tmToggleStoryVideo(\'' . $vidBoxId . '\', \'' . $embedVid . '\', true)" title="Xem tập phim: ' . $title . '" aria-label="Xem tập phim: ' . $title . '">'
+                       . '              <img src="' . $safeThumb . '"' . $onErrAttr . ' alt="' . $title . '" loading="lazy" class="tm-vidstory-thumb-img" />'
+                       . '              <span class="tm-vidstory-play-circle" aria-hidden="true">▶</span>'
+                       . ($dur !== '' ? '<span class="tm-vidstory-dur-badge">' . $dur . '</span>' : '')
+                       . '            </button>'
+                       . '          </div>';
+            }
+
+            $html .= '          <div class="tm-chronicle-story">';
+            if ($narrative !== '') {
+                $html .= '            <div class="tm-chronicle-narrative">' . $narrative . '</div>';
+            }
+
+            if (!empty($highlights)) {
+                $html .= '            <div class="tm-chronicle-highlights" aria-label="Nhân vật & Điển tích trọng tâm">'
+                       . '              <span class="tm-chronicle-hl-label">🪷 Điển tích &amp; Nhân vật:</span>';
+                foreach ($highlights as $hl) {
+                    $html .= '              <span class="tm-chronicle-hl-chip">' . htmlspecialchars($hl, ENT_QUOTES, 'UTF-8') . '</span>';
+                }
+                $html .= '            </div>';
+            }
+
+            $html .= '            <div class="tm-vidstory-actions">';
+            if ($embedVid !== '') {
+                $html .= '              <button type="button" class="tm-track-btn tm-track-btn-video tm-vidstory-play-btn" data-vid-btn="' . $vidBoxId . '" data-open-label="🎬 Xem Tập Phim" onclick="window.tmToggleStoryVideo(\'' . $vidBoxId . '\', \'' . $embedVid . '\', true)">🎬 Xem Tập Phim</button>';
+            }
+            if ($safeVid !== '') {
+                $html .= '              <a class="tm-track-action" href="' . $safeVid . '" target="_blank" rel="noopener noreferrer" title="Mở tập phim gốc trên YouTube">↗ YouTube</a>';
+            }
+            $shareSummary = htmlspecialchars($rawNarr, ENT_QUOTES, 'UTF-8');
+            $shareAnchor  = '#tap-' . htmlspecialchars((string)$epNum, ENT_QUOTES, 'UTF-8');
+            $html .= '              <button type="button" class="tm-track-btn tm-track-btn-share" onclick="window.tmShareStory(this)" data-title="' . $title . '" data-url="' . $shareAnchor . '" data-vol="' . $volTitleClean . '" data-summary="' . $shareSummary . '">🔗 Chia sẻ</button>'
+                   . '            </div>'
+                   . '          </div>'
+                   . '        </div>'
+                   . '        <div class="tm-story-video-drawer" id="' . $vidBoxId . '" style="display:none;"></div>'
+                   . '      </div>'
+                   . '    </article>';
         }
 
         $html .= '  </div>'

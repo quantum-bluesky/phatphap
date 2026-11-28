@@ -4371,5 +4371,345 @@ body.tm-night-mode .tm-videohub-cta {
     }
 }
 
+/* ==========================================================================
+   Sacred Chronicle Timeline (Cuộc Đời Đức Phật Thích Ca - Lịch Sử Truyền Thuyết)
+   ========================================================================== */
+.tm-chronicle-app {
+    margin: 22px 0 32px 0;
+}
+
+.tm-chronicle-controls {
+    background: #faf6ee;
+    border: 1px solid #dfd1b8;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 24px;
+}
+
+.tm-chronicle-eras {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #e2d5bf;
+}
+
+.tm-chronicle-era-pill {
+    background: #ffffff !important;
+    color: #4a3728 !important;
+    border: 1px solid #d6c5aa !important;
+    border-radius: 999px;
+    padding: 5px 13px;
+    font-size: 0.83rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.16s ease;
+}
+
+.tm-chronicle-era-pill:hover {
+    border-color: #9a5b13 !important;
+    color: #6e2b19 !important;
+}
+
+.tm-chronicle-era-pill.active {
+    background: #6e2b19 !important;
+    color: #fff8e7 !important;
+    border-color: #6e2b19 !important;
+}
+
+.tm-chronicle-track {
+    position: relative;
+    padding-left: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.tm-chronicle-track::before {
+    content: "";
+    position: absolute;
+    left: 17px;
+    top: 16px;
+    bottom: 16px;
+    width: 2px;
+    background: linear-gradient(180deg, #c9972c 0%, #d8c29a 50%, #c9972c 100%);
+}
+
+.tm-chronicle-node {
+    position: relative;
+}
+
+.tm-chronicle-marker {
+    position: absolute;
+    left: -44px;
+    top: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #6e2b19;
+    border: 3px solid #f7ebd9;
+    box-shadow: 0 0 0 1px #c9972c, 0 3px 8px rgba(43, 29, 18, 0.16);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.tm-chronicle-badge-num {
+    color: #fff8e7;
+    font-size: 0.84rem;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+}
+
+.tm-chronicle-panel {
+    background: #ffffff;
+    border: 1px solid #dfd1b8;
+    border-radius: 12px;
+    padding: 18px 20px;
+    box-shadow: 0 3px 14px rgba(43, 29, 18, 0.05);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.tm-chronicle-panel:hover {
+    box-shadow: 0 8px 24px rgba(43, 29, 18, 0.09);
+    border-color: #c9972c;
+}
+
+.tm-chronicle-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.tm-chronicle-chap {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #fff8e7;
+    background: #8c3b19;
+    padding: 2px 10px;
+    border-radius: 6px;
+    letter-spacing: 0.02em;
+}
+
+.tm-chronicle-era-tag {
+    font-size: 0.79rem;
+    font-weight: 700;
+    color: #7c4a12;
+    background: #fbf2df;
+    border: 1px solid #ead5ae;
+    padding: 2px 10px;
+    border-radius: 6px;
+}
+
+.tm-chronicle-loc {
+    font-size: 0.8rem;
+    color: #5c4b3b;
+    font-weight: 500;
+}
+
+.tm-chronicle-dur {
+    font-size: 0.78rem;
+    color: #78624d;
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+}
+
+.tm-chronicle-title {
+    margin: 0 0 14px 0 !important;
+    font-size: calc(1.16rem * var(--tm-font-scale, 1)) !important;
+    line-height: 1.4 !important;
+    font-weight: 700 !important;
+    color: #261a10 !important;
+}
+
+.tm-chronicle-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.tm-chronicle-media {
+    flex: 0 0 250px;
+    width: 250px;
+}
+
+.tm-chronicle-story {
+    flex: 1;
+    min-width: 0;
+}
+
+.tm-chronicle-narrative {
+    font-size: calc(0.96rem * var(--tm-font-scale, 1)) !important;
+    line-height: calc(1.72 * (1 + (var(--tm-font-scale, 1) - 1) * 0.2)) !important;
+    color: #3a2d22;
+    margin-bottom: 12px;
+}
+
+.tm-chronicle-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 12px;
+    background: #faf6ee;
+    border: 1px solid #e7dac4;
+    border-radius: 9px;
+    margin-bottom: 12px;
+}
+
+.tm-chronicle-hl-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #7c3a1d;
+    margin-right: 4px;
+}
+
+.tm-chronicle-hl-chip {
+    font-size: 0.79rem;
+    font-weight: 600;
+    color: #4b392a;
+    background: #ffffff;
+    border: 1px solid #dfd1b8;
+    border-radius: 999px;
+    padding: 2px 10px;
+}
+
+.tm-chronicle-gap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 16px;
+    background: #fcf8ef;
+    border: 1px dashed #d3be96;
+    border-radius: 10px;
+    color: #6b533b;
+    font-size: 0.88rem;
+    line-height: 1.55;
+}
+
+.tm-chronicle-gap-dot {
+    position: absolute;
+    left: -38px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #fcf8ef;
+    border: 1px dashed #c9972c;
+    color: #9a6b1b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    z-index: 2;
+}
+
+/* Night mode for Chronicle Timeline */
+html.tm-night-mode .tm-chronicle-controls,
+body.tm-night-mode .tm-chronicle-controls,
+html.tm-night-mode .tm-chronicle-highlights,
+body.tm-night-mode .tm-chronicle-highlights {
+    background: #1a1511;
+    border-color: #3b2f25;
+}
+
+html.tm-night-mode .tm-chronicle-era-pill,
+body.tm-night-mode .tm-chronicle-era-pill {
+    background: #261e18 !important;
+    color: #e6dac8 !important;
+    border-color: #46372b !important;
+}
+
+html.tm-night-mode .tm-chronicle-era-pill.active,
+body.tm-night-mode .tm-chronicle-era-pill.active {
+    background: #b45309 !important;
+    color: #fffbeb !important;
+    border-color: #b45309 !important;
+}
+
+html.tm-night-mode .tm-chronicle-panel,
+body.tm-night-mode .tm-chronicle-panel {
+    background: #1f1914;
+    border-color: #3b2f25;
+}
+
+html.tm-night-mode .tm-chronicle-marker,
+body.tm-night-mode .tm-chronicle-marker {
+    border-color: #2b211a;
+}
+
+html.tm-night-mode .tm-chronicle-title,
+body.tm-night-mode .tm-chronicle-title {
+    color: #f5ebd9 !important;
+}
+
+html.tm-night-mode .tm-chronicle-narrative,
+body.tm-night-mode .tm-chronicle-narrative,
+html.tm-night-mode .tm-chronicle-loc,
+body.tm-night-mode .tm-chronicle-loc {
+    color: #d9cbb8 !important;
+}
+
+html.tm-night-mode .tm-chronicle-era-tag,
+body.tm-night-mode .tm-chronicle-era-tag {
+    background: #332518;
+    border-color: #543c24;
+    color: #fcd34d;
+}
+
+html.tm-night-mode .tm-chronicle-hl-label,
+body.tm-night-mode .tm-chronicle-hl-label {
+    color: #fbbf24;
+}
+
+html.tm-night-mode .tm-chronicle-hl-chip,
+body.tm-night-mode .tm-chronicle-hl-chip {
+    background: #2a2119;
+    border-color: #443528;
+    color: #e5d8c5;
+}
+
+html.tm-night-mode .tm-chronicle-gap,
+body.tm-night-mode .tm-chronicle-gap {
+    background: #1c1712;
+    border-color: #4a3b2c;
+    color: #cbbba6;
+}
+
+html.tm-night-mode .tm-chronicle-gap-dot,
+body.tm-night-mode .tm-chronicle-gap-dot {
+    background: #1c1712;
+    color: #fbbf24;
+}
+
+@media (max-width: 720px) {
+    .tm-chronicle-track {
+        padding-left: 0;
+    }
+    .tm-chronicle-track::before,
+    .tm-chronicle-marker,
+    .tm-chronicle-gap-dot {
+        display: none;
+    }
+    .tm-chronicle-body {
+        flex-direction: column;
+        gap: 14px;
+    }
+    .tm-chronicle-media {
+        flex: none;
+        width: 100%;
+    }
+    .tm-chronicle-panel {
+        padding: 14px 15px;
+    }
+    .tm-chronicle-dur {
+        margin-left: 0;
+    }
+}
+
+
 
 
