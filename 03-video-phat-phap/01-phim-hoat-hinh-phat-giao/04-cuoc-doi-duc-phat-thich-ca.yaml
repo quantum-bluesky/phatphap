@@ -1,0 +1,100 @@
+meta:
+  title: 'Cuộc Đời Đức Phật Thích Ca — Biên Niên Sử Hoạt Hình Truyền Thuyết (ANM Phật Pháp)'
+  description: 'Trọn bộ phim hoạt hình lịch sử Cuộc Đời Đức Phật Thích Ca từ kênh ANM Phật Pháp: tái hiện theo dòng thời gian từ tiền thân phát nguyện, Đản sanh tại Lâm-tỳ-ni, bốn cảnh tượng cửa thành, vượt thành xuất gia đến sứ mệnh hoằng pháp sơ kỳ.'
+  heroimage: 'https://i.ytimg.com/vi/OxwOCFo3bOM/maxresdefault.jpg'
+  heroimagealt: 'Phim Hoạt Hình Lịch Sử Cuộc Đời Đức Phật Thích Ca — ANM Phật Pháp'
+  owner: 'quannd'
+  author: 'ANM Phật Pháp (@anmphatphap) • Biên tập: Tịnh Độ Liên Hoa'
+  created: '2026-11-28'
+  modified: '2026-11-28'
+  time: '11-00-00'
+  navtitle: 'Cuộc Đời Đức Phật Thích Ca'
+  pageid: 'hoathinhpg00005'
+mediaplayer:
+  chronicle:
+    items:
+    - episode: 1
+      chapter_label: 'Tập 1'
+      era: '1. Tiền Thân & Đản Sanh'
+      location: 'Thành Dipavati • Cung trời Đâu Suất • Vườn Lâm-tỳ-ni'
+      duration: '33:21'
+      title: 'Tiền Thân Đức Phật Thích Ca Và Đức Phật Đản Sanh'
+      video_url: 'https://www.youtube.com/watch?v=OxwOCFo3bOM'
+      narrative: |
+        Khởi nguồn từ vô lượng kiếp về trước, đạo sĩ Sumedha (Thiện Huệ) phát đại nguyện cầu đạo Vô Thượng Chánh Đẳng Chánh Giác và được Đức Phật Dipankara (Nhiên Đăng) thọ ký sẽ thành Phật hiệu Thích Ca Mâu Ni. Trải qua nhiều kiếp thực hành mười hạnh Ba-la-mật như tiền thân thanh niên Jotipala và thái tử Vessantara, Bồ-tát từ cung trời Đâu Suất giáng trần vào hoàng cung vua Tịnh Phạn và Hoàng hậu Ma-da, đản sanh đầy điềm lành giữa vườn hoa Lâm-tỳ-ni.
+      highlights:
+      - 'Đạo sĩ Thiện Huệ (Sumedha)'
+      - 'Đức Phật Nhiên Đăng thọ ký'
+      - 'Hạnh Ba-la-mật'
+      - 'Đản sanh tại vườn Lâm-tỳ-ni'
+    - episode: 2
+      chapter_label: 'Tập 2'
+      era: '2. Hoàng Cung & Bốn Cửa Thành'
+      location: 'Hoàng thành Ca-tỳ-la-vệ (Kapilavatthu)'
+      duration: '25:36'
+      title: 'Hành Trình Trưởng Thành Của Thái Tử Tất Đạt Đa'
+      video_url: 'https://www.youtube.com/watch?v=7OfRg4DARLI'
+      narrative: |
+        Tiên ông Asita (A-tư-đà) từ núi tuyết xuống chiêm bái Thái tử Siddhattha (Tất Đạt Đa) rồi vừa vui mừng vừa rơi lệ khi tiên tri Ngài chắc chắn sẽ thành bậc Chánh Giác cứu độ thế gian. Trải qua lễ đặt tên với 32 tướng Đại Trượng Phu và lời khẳng định duy nhất của đạo sĩ trẻ Kondanna (Kiều Trần Như), Thái tử lớn lên dưới sự dưỡng dục của Di mẫu Ma-ha Ba-xà-ba-đề, bộc lộ lòng từ bi sâu sắc qua điển tích cứu thiên nga, thiền định dưới gốc cây diêm-phù-đề và kết duyên cùng công nương Da-du-đà-la.
+      highlights:
+      - 'Tiên ông A-tư-đà (Asita)'
+      - '32 tướng Đại Trượng Phu'
+      - 'Dự ngôn của Kiều Trần Như'
+      - 'Công nương Da-du-đà-la'
+    - episode: 3
+      chapter_label: 'Tập 3'
+      era: '2. Hoàng Cung & Bốn Cửa Thành'
+      location: 'Bốn cửa thành Ca-tỳ-la-vệ'
+      duration: '25:38'
+      title: 'Bốn Cảnh Tượng Thay Đổi Cuộc Đời Thái Tử Tất Đạt Đa'
+      video_url: 'https://www.youtube.com/watch?v=1JXICMDlsPk'
+      narrative: |
+        Dù vua Tịnh Phạn xây ba tòa cung điện bốn mùa để giữ chân Thái tử trước bảy giấc mộng kỳ lạ báo điềm xuất gia, định mệnh vẫn gọi tên qua lời nhắc nhở của thiên nhân Tác Bình. Trong bốn chuyến xuất du ra khỏi hoàng thành Ca-tỳ-la-vệ, Thái tử lần lượt tận mắt chứng kiến bốn cảnh tượng làm chấn động tâm can: Người Già yếu lom khom, Người Bệnh đau đớn, Người Chết trong tiếng khóc tiễn đưa, và dáng vẻ thanh thản tự tại của một vị Sa-môn.
+      highlights:
+      - 'Bảy giấc mộng vua Tịnh Phạn'
+      - 'Sinh – Lão – Bệnh – Tử'
+      - 'Bốn lần dạo cửa thành'
+      - 'Hình ảnh vị Sa-môn'
+    - episode: 4
+      chapter_label: 'Tập 4'
+      era: '3. Vượt Thành Xuất Gia'
+      location: 'Hoàng thành Ca-tỳ-la-vệ • Bờ sông Anoma'
+      duration: 'Phim dài'
+      title: 'Đức Phật Xuất Gia Và Hành Trình Tìm Đạo'
+      video_url: 'https://www.youtube.com/watch?v=GHxdnH9_8Cs'
+      narrative: |
+        Trong đêm trăng yên tĩnh được thiên vương Đế Thích và chư thiên lặng lẽ hộ trì, Thái tử Tất Đạt Đa ghé nhìn lần cuối công nương Da-du-đà-la đang say giấc cùng hoàng nam La-hầu-la mới chào đời. Ngài cùng người đánh xe trung thành Channa (Xa Nặc) và tuấn mã Kanthaka (Kiền Trắc) vượt qua cổng thành Ca-tỳ-la-vệ, đến bên bờ sông Anoma tự tay cắt bỏ mái tóc, đổi hoàng bào lấy tấm áo cà-sa giản dị, chính thức bước vào hành trình tầm sư học đạo.
+      highlights:
+      - 'Từ biệt Da-du-đà-la & La-hầu-la'
+      - 'Xa Nặc & ngựa Kiền Trắc'
+      - 'Cắt tóc bên bờ sông Anoma'
+      - 'Khởi đầu hành trình tìm đạo'
+    - episode: 9
+      chapter_label: 'Tập 9'
+      era: '4. Hoằng Pháp Sơ Kỳ'
+      location: 'Vườn Lộc Uyển (Isipatana) • Thành Ba-la-nại'
+      duration: '20:14'
+      title: 'Tăng Đoàn Phát Triển Và Sứ Mệnh Hoằng Pháp Đầu Tiên'
+      video_url: 'https://www.youtube.com/watch?v=YHx8ziddEP0'
+      gap_before: '⏳ Các tập 5–8 (giai đoạn Khổ hạnh 6 năm, Thành đạo dưới cội Bồ-đề và Chuyển Pháp luân đầu tiên) hiện đang chờ kênh gốc ANM Phật Pháp phát hành tiếp — sẽ được cập nhật vào đúng vị trí này ngay khi ra mắt.'
+      narrative: |
+        Tiếp nối buổi Chuyển Pháp luân tại vườn Lộc Uyển, Đức Phật thuyết giảng Kinh Vô Ngã Tướng giúp năm anh em Tỳ-kheo Kiều Trần Như chứng đắc quả vị A-la-hán. Ánh sáng Chánh pháp nhanh chóng cảm hóa công tử Yasa (Da-xá) cùng song thân và năm mươi bốn người bạn đồng hành. Khi Tăng đoàn hội tụ đủ sáu mươi vị A-la-hán đầu tiên, Đức Thế Tôn ban lời phó chúc lịch sử: «Này các Tỳ-kheo, hãy lên đường du hành vì hạnh phúc, vì an lạc của số đông, vì lòng thương tưởng cho đời».
+      highlights:
+      - 'Kinh Vô Ngã Tướng'
+      - 'Năm vị A-la-hán đầu tiên'
+      - 'Độ công tử Da-xá (Yasa)'
+      - '60 vị A-la-hán lên đường hoằng pháp'
+    - episode: 10
+      chapter_label: 'Tập 10'
+      era: '4. Hoằng Pháp Sơ Kỳ'
+      location: 'Làng Ưu-lâu-tần-loa (Uruvela) • Sông Ni-liên-thiền'
+      duration: '17:14'
+      title: 'Đức Phật Hiển Lộ Thần Thông Và Hóa Độ Ba Anh Em Ca Diếp'
+      video_url: 'https://www.youtube.com/watch?v=n077HotWaCU'
+      narrative: |
+        Đức Phật một mình trở về vùng Uruvela, nơi ba anh em đạo sĩ thờ lửa lừng danh — Ưu-lâu-tần-loa Ca Diếp, Na-đề Ca Diếp và Già-da Ca Diếp — đang dẫn dắt một nghìn đồ chúng. Bằng tâm từ bi bất động và oai lực giác ngộ, Đức Phật hàng phục mãng xà hung dữ trong hỏa viện, nhiếp phục tâm kiêu mạn của vị trưởng huynh Ca Diếp và thuyết Kinh Lửa Cháy, khiến cả ba anh em cùng một nghìn đạo sĩ đồng loạt thả trôi dụng cụ tế lửa xuống dòng sông để xin xuất gia quy y Tăng đoàn.
+      highlights:
+      - 'Ba anh em Ca Diếp (Kassapa)'
+      - 'Hàng phục mãng xà trong hỏa viện'
+      - '1.000 đạo sĩ thờ lửa quy y'
+      - 'Ánh sáng Chánh pháp tại Uruvela'

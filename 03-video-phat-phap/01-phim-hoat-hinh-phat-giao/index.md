@@ -15,9 +15,9 @@
 
 ---
 
-## 2. Khám Phá Trọn Bộ 3 Tuyển Tập Hoạt Hình Phật Giáo (46 Tập)
+## 2. Khám Phá Các Bộ Phim Hoạt Hình Phật Giáo
 
-Toàn bộ các tập phim trên kênh **Hải Triều Âm** được sắp xếp mạch lạc theo **3 chủ đề lớn**, trong đó **mỗi câu chuyện đều có sẵn Lời mở đầu định hướng mục tiêu và Bài học ứng dụng thực tế vào đời sống hằng ngày**:
+Mục **Phim Hoạt Hình Phật Giáo** quy tụ hai dòng phim bổ trợ nhau: **Biên Niên Sử Truyền Thuyết Cuộc Đời Đức Phật Thích Ca** (*ANM Phật Pháp* — trình bày theo dòng thời gian lịch sử) và **3 Tuyển Tập Chú Tiểu Chân Tâm** (*Hải Triều Âm* — mỗi câu chuyện đều có sẵn *Lời mở đầu* và *Bài học cuộc sống*):
 
 [:videohub id="videohub" :]
 
