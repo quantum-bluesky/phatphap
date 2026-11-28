@@ -2470,26 +2470,28 @@
         document.body.classList.add("tm-kpc-modal-open");
     };
 
-    window.tmBuhdOpenShareModal = function (storyTitle, storyUrl, summaryText, volTitle) {
+    window.tmBuhdOpenShareModal = function (storyTitle, storyUrl, summaryText, volTitle, isVideo) {
         var modal = ensureKpcShareModal();
         volTitle = volTitle || "Báo Ứng Hiện Đời";
         storyTitle = storyTitle || "Câu chuyện nhân quả";
         var absUrl = storyUrl || window.location.href;
-        if (absUrl && !absUrl.match(/^https?:\/\//i)) {
+        if (absUrl && absUrl.charAt(0) === '#') {
+            absUrl = window.location.origin + window.location.pathname + window.location.search + absUrl;
+        } else if (absUrl && !absUrl.match(/^https?:\/\//i)) {
             absUrl = window.location.origin + (absUrl.charAt(0) === '/' ? '' : '/') + absUrl;
         }
 
         var cleanSummary = (summaryText || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-        var fullText = "📖 " + volTitle + "\n" +
-                       "🔹 Câu chuyện: " + storyTitle + "\n\n" +
+        var fullText = (isVideo ? "🎬 " : "📖 ") + volTitle + "\n" +
+                       (isVideo ? "🔹 Tập phim: " : "🔹 Câu chuyện: ") + storyTitle + "\n\n" +
                        (cleanSummary ? (cleanSummary + "\n\n") : "") +
-                       "🔗 Đọc toàn văn & nghe audio tại: " + absUrl;
+                       (isVideo ? "🔗 Xem phim tại: " : "🔗 Đọc toàn văn & nghe audio tại: ") + absUrl;
 
         activeSharePayload = {
             url: absUrl,
             fullText: fullText,
             title: storyTitle + " — " + volTitle,
-            label: "câu chuyện: " + storyTitle
+            label: (isVideo ? "tập phim: " : "câu chuyện: ") + storyTitle
         };
 
         var titleEl = document.getElementById("tm-kpc-share-title");
@@ -2552,6 +2554,7 @@
         var url = btn.getAttribute("data-url") || window.location.href;
         var summary = btn.getAttribute("data-summary") || "";
         var vol = btn.getAttribute("data-vol") || "Báo Ứng Hiện Đời";
+        var isVideo = !!(btn.closest && btn.closest(".tm-vidstory-card, .tm-chronicle-card"));
 
         if (!summary) {
             var card = btn.closest ? btn.closest(".tm-story-card, .tm-story-summary") : null;
@@ -2562,7 +2565,7 @@
                 }
             }
         }
-        window.tmBuhdOpenShareModal(title, url, summary, vol);
+        window.tmBuhdOpenShareModal(title, url, summary, vol, isVideo);
     };
 
     function initKnnpReader() {

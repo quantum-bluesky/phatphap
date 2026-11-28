@@ -45,7 +45,7 @@ class mediaplayer extends Plugin
         }
         if (!$this->adminroute || $this->editorroute) {
             $this->addCSS('/mediaplayer/css/mediaplayer.css?20261128c');
-            $this->addJS('/mediaplayer/js/mediaplayer.js?20261128c');
+            $this->addJS('/mediaplayer/js/mediaplayer.js?20261128d');
         }
     }
 
