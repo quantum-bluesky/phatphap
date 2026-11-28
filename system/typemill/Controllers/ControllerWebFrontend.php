@@ -402,6 +402,41 @@ class ControllerWebFrontend extends Controller
 			$metaImageAlt = $metadata['meta']['heroimagealt'] ?? false;
 			if(!$metaImageUrl OR $metaImageUrl == '')
 			{
+				# Check mediaplayer video/chronicle/videohub cover or YouTube video_url first
+				$mp = $metadata['mediaplayer'] ?? null;
+				if(is_array($mp))
+				{
+					foreach(['chronicle', 'videos', 'videohub', 'stories'] as $mpKey)
+					{
+						$mpItems = $mp[$mpKey]['items'] ?? null;
+						if(is_array($mpItems) && !empty($mpItems[0]))
+						{
+							$firstItem = $mpItems[0];
+							if(!empty($firstItem['cover']))
+							{
+								$metaImageUrl = $firstItem['cover'];
+								$metaImageAlt = $firstItem['title'] ?? $pageTitle;
+								break;
+							}
+							if(!empty($firstItem['thumb']))
+							{
+								$metaImageUrl = $firstItem['thumb'];
+								$metaImageAlt = $firstItem['title'] ?? $pageTitle;
+								break;
+							}
+							$ytCandidate = $firstItem['cover_id'] ?? ($firstItem['video_url'] ?? '');
+							if($ytCandidate && preg_match('/(?:youtube(?:-nocookie)?\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/|^)([A-Za-z0-9_-]{11})(?:$|[^A-Za-z0-9_-])/i', $ytCandidate, $ytM))
+							{
+								$metaImageUrl = 'https://i.ytimg.com/vi/' . $ytM[1] . '/hqdefault.jpg';
+								$metaImageAlt = $firstItem['title'] ?? $pageTitle;
+								break;
+							}
+						}
+					}
+				}
+			}
+			if(!$metaImageUrl OR $metaImageUrl == '')
+			{
 				# extract first image from content
 				$firstImageMD = $content->getFirstImage($contentArray);
 				if($firstImageMD)
@@ -413,6 +448,11 @@ class ControllerWebFrontend extends Controller
 						preg_match('#\[(.*?)\]#', $firstImageMD, $img_alt_result);
 						$metaImageAlt = isset($img_alt_result[1]) ? $img_alt_result[1] : false;
 					}
+				}
+				elseif(is_string($contentHtml) && preg_match('/(?:youtube(?:-nocookie)?\.com\/(?:embed\/|watch\?v=)|youtu\.be\/)([A-Za-z0-9_-]{11})/i', $contentHtml, $ytBodyM))
+				{
+					$metaImageUrl = 'https://i.ytimg.com/vi/' . $ytBodyM[1] . '/hqdefault.jpg';
+					$metaImageAlt = $pageTitle;
 				}
 				elseif($logo)
 				{

@@ -710,6 +710,48 @@
         if (visEl) visEl.textContent = String(visible);
     };
 
+    window.tmSelectChronicleEra = function (boxId, era, pillEl) {
+        var box = document.getElementById(boxId);
+        if (!box) return;
+        box.setAttribute("data-active-era", era || "all");
+        var pills = box.querySelectorAll(".tm-chronicle-era-pill");
+        for (var i = 0; i < pills.length; i++) {
+            pills[i].classList.toggle("active", pills[i] === pillEl);
+        }
+        window.tmFilterChronicle(boxId);
+    };
+
+    window.tmFilterChronicle = function (boxId) {
+        var box = document.getElementById(boxId);
+        if (!box) return;
+        var input = box.querySelector(".tm-chronicle-search");
+        var qRaw = input ? (input.value || "").trim().toLowerCase() : "";
+        var qNorm = normalizeViSearch(qRaw);
+        var activeEra = box.getAttribute("data-active-era") || "all";
+        var nodes = box.querySelectorAll(".tm-chronicle-node");
+        var visible = 0;
+
+        for (var i = 0; i < nodes.length; i++) {
+            var n = nodes[i];
+            var nEra = n.getAttribute("data-era") || "";
+            var nSearch = n.getAttribute("data-search") || "";
+            var eraOk = (activeEra === "all" || nEra === activeEra);
+            var searchOk = !qNorm || nSearch.indexOf(qRaw) !== -1 || nSearch.indexOf(qNorm) !== -1;
+            var show = eraOk && searchOk;
+            n.style.display = show ? "" : "none";
+            if (show) visible += 1;
+        }
+
+        var gaps = box.querySelectorAll(".tm-chronicle-gap");
+        var showGaps = (activeEra === "all" && !qNorm);
+        for (var g = 0; g < gaps.length; g++) {
+            gaps[g].style.display = showGaps ? "" : "none";
+        }
+
+        var visEl = box.querySelector(".tm-chronicle-visible");
+        if (visEl) visEl.textContent = String(visible);
+    };
+
     window.tmToggleStoryVideo = function (drawerId, embedUrl, autoPlay) {
         var drawer = document.getElementById(drawerId);
         if (!drawer) return;
@@ -729,7 +771,7 @@
             }
             var vidId = extractYoutubeIdFromUrl(finalUrl);
             var savedYt = vidId ? getSavedYtProgress(vidId) : null;
-            var card = drawer.closest ? drawer.closest(".tm-story-card, .tm-vidstory-card") : null;
+            var card = drawer.closest ? drawer.closest(".tm-story-card, .tm-vidstory-card, .tm-chronicle-card") : null;
             var cardTitleEl = card ? card.querySelector(".tm-story-title") : null;
             var vidTitle = cardTitleEl ? cardTitleEl.textContent.trim() : document.title;
 
@@ -769,7 +811,7 @@
             drawer.style.display = "none";
             drawer.innerHTML = "";
             if (toggleBtn) {
-                toggleBtn.textContent = "🎬 Xem Phim Ngay";
+                toggleBtn.textContent = toggleBtn.getAttribute("data-open-label") || "🎬 Xem Phim Ngay";
             }
         }
     };
